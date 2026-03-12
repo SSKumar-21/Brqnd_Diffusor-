@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>User Activity</title>
+<link rel="stylesheet" href="/style.css">
+
+<style>
+
+body{
+font-family: Arial;
+background:#f4f6fb;
+padding:40px;
+}
+
+h1{
+margin-bottom:10px;
+}
+
+.user-box{
+background:white;
+padding:15px;
+border-radius:8px;
+margin-bottom:20px;
+box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+
+.activity-card{
+background:white;
+padding:20px;
+border-radius:10px;
+margin-bottom:25px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.activity-grid{
+display:grid;
+grid-template-columns:1fr 2fr;
+gap:20px;
+}
+
+.input-box{
+background:#f7f8fc;
+padding:15px;
+border-radius:6px;
+}
+
+.input-box p{
+margin:6px 0;
+}
+
+.predictions{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
+
+.platform{
+background:#2962ff;
+color:white;
+padding:12px;
+border-radius:6px;
+text-align:center;
+}
+
+.delete-btn{
+background:#ff5252;
+color:white;
+border:none;
+padding:6px 12px;
+border-radius:5px;
+cursor:pointer;
+margin-top:10px;
+}
+
+.back{
+display:inline-block;
+margin-bottom:20px;
+text-decoration:none;
+color:#2962ff;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>User Prediction Activity</h1>
+
+<div class="user-box">
+<b>User:</b> <%= email %>
+</div>
+
+<a href="/dashboard" class="back">⬅ Back to Dashboard</a>
+
+<% userHistory.forEach(function(item,index){ %>
+
+<div class="activity-card">
+
+<h3>Prediction #<%= index+1 %></h3>
+
+<div class="activity-grid">
+
+<!-- INPUT DATA -->
+
+<div class="input-box">
+
+<h4>Business Profile</h4>
+
+<p><b>Industry:</b> <%= item.input.industry %></p>
+<p><b>Company Size:</b> <%= item.input.company_size %></p>
+<p><b>Budget:</b> <%= item.input.budget %></p>
+<p><b>Age Group:</b> <%= item.input.age_group %></p>
+<p><b>Gender:</b> <%= item.input.gender %></p>
+<p><b>Interest:</b> <%= item.input.interest %></p>
+
+</div>
+
+
+<!-- PREDICTION RESULT -->
+
+<div>
+
+<h4>Recommended Platforms</h4>
+
+<div class="predictions">
+
+<% item.prediction.predictions.forEach(function(p){ %>
+
+<div class="platform">
+
+<b><%= p.platform %></b>
+
+<br>
+
+<%= p.probability %> %
+
+</div>
+
+<% }) %>
+
+</div>
+
+<form method="POST" action="/deleteActivity/<%= item.key %>">
+
+<button class="delete-btn">Delete Activity</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+<% }) %>
+
+</body>
+
+</html>

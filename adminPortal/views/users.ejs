@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>All Users</title>
+<link rel="stylesheet" href="/style.css">
+
+<style>
+
+body{
+font-family: "Segoe UI", Arial;
+background:#f4f6fb;
+margin:0;
+padding:40px;
+}
+
+/* HEADER */
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+}
+
+.header h1{
+margin:0;
+}
+
+/* CARD */
+
+.card{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* TABLE */
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:10px;
+}
+
+th{
+background:#2962ff;
+color:white;
+padding:12px;
+text-align:left;
+}
+
+td{
+padding:12px;
+border-bottom:1px solid #eee;
+}
+
+tr:hover{
+background:#f7f9ff;
+}
+
+/* USER BADGE */
+
+.email{
+font-weight:600;
+color:#333;
+}
+
+.company{
+color:#666;
+}
+
+/* BUTTONS */
+
+.btn{
+padding:6px 12px;
+border-radius:6px;
+text-decoration:none;
+font-size:14px;
+margin-right:6px;
+}
+
+.activity{
+background:#00c853;
+color:white;
+}
+
+.delete{
+background:#ff5252;
+color:white;
+}
+
+.back{
+display:inline-block;
+margin-bottom:20px;
+color:#2962ff;
+text-decoration:none;
+font-weight:500;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<a href="/dashboard" class="back">⬅ Back to Dashboard</a>
+
+<div class="header">
+<h1>All Registered Users</h1>
+</div>
+
+<div class="card">
+
+<table>
+
+<tr>
+<th>Email</th>
+<th>Company</th>
+<th>Actions</th>
+</tr>
+
+<% for(let id in users){ %>
+
+<tr>
+
+<td class="email"><%= users[id].email %></td>
+
+<td class="company"><%= users[id].company || "N/A" %></td>
+
+<td>
+
+<a href="/userActivity/<%= users[id].email %>" class="btn activity">Activity</a>
+
+<a href="/deleteUser/<%= id %>" class="btn delete">Delete</a>
+
+</td>
+
+</tr>
+
+<% } %>
+
+</table>
+
+</div>
+
+</body>
+
+</html>
